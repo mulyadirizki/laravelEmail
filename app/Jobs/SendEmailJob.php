@@ -8,23 +8,23 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
+use App\Mail\SendEmailDemo;
+use Mail;
 
-class SendMailJob implements ShouldQueue
+class SendEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $data;
+    protected $send_mail;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($send_mail)
     {
-        $this->data = $data;
+        $this->send_mail = $send_mail;
     }
 
     /**
@@ -34,7 +34,7 @@ class SendMailJob implements ShouldQueue
      */
     public function handle()
     {
-        $email = new SendMail($this->data);
-        Mail::to($this->data['email'])->send($email);
+        $email = new SendEmailDemo();        
+        Mail::to($this->send_mail)->send($email);
     }
 }

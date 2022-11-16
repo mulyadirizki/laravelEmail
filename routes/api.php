@@ -15,8 +15,8 @@ use App\Http\Controllers\SendEmailController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::post('kirim-email', [SendEmailController::class, 'store']);
+Route::get('kirim-email', [SendEmailController::class, 'index']);
